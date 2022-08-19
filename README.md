@@ -21,10 +21,10 @@ because they have artificially low variability.
 
 To help with this masking,
 the AGCD dataset includes precipitation weight files assign the following values
-at each grid point and time step:
-  0: Observations have no influence on analysed value
-  1: Observations have minimal influence
-  3: Observations influence the analysed value
+at each grid point and time step:  
+- 0: Observations have no influence on analysed value  
+- 1: Observations have minimal influence  
+- 3: Observations influence the analysed value  
 
 The `agcd_weight_fraction.py` script can be used to calculate the fraction of days at each grid point
 that had good observational (i.e. rain guage) coverage.
