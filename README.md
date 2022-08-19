@@ -4,7 +4,7 @@ This directory contains command line programs for masking AGCD data.
 
 If you're a member of the `wp00` project on NCI
 (i.e. if you're part of the CSIRO Climate Innovation Hub),
-the easiest way to use the scripts is to use the cloned copy at `/g/data/wp00/shared_code/workflows/cmdline_programs/`.
+the easiest way to use the scripts is to use the cloned copy at `/g/data/wp00/shared_code/agcd-masking/`.
 They can be run using the Python environment at `/g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python`.
 
 
