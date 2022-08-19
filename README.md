@@ -30,7 +30,7 @@ The `agcd_weight_fraction.py` script can be used to calculate the fraction of da
 that had good observational (i.e. rain guage) coverage.
 
 ```
-$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/workflows/cmdline_programs/agcd_weight_fraction.py -h
+$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/agcd_weight_fraction.py -h
 usage: agcd_weight_fraction.py [-h] [infiles ...] outfile
 
 Command line program for calculating AGCD observation coverage.
@@ -57,25 +57,28 @@ options:
 For example, 
 
 ```
-$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/workflows/cmdline_programs/agcd_weight_fraction.py /g/data/zv2/agcd/v1/precip/weight/r005/01day/agcd_v1_precip_weight_r005_daily_197*.nc /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1970-1979.nc
+$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/agcd_weight_fraction.py /g/data/zv2/agcd/v1/precip/weight/r005/01day/agcd_v1_precip_weight_r005_daily_19[6,7]*.nc /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc
 ```
 
-TODO: Show a plot of the weights fraction output.
+The resulting file is plotted in `obs_weight_fraction.ipynb`.
+
+![example obs weight fraction](obs_weight_fraction.png)
 
 
 ## Applying a mask
 
-The `mask_agcd.py` script then takes a weight fraction file and masks any grid points below a specified fraction.
-It is also possible to pass the script a shapefile to mask all ocean points.
+The `apply_mask.py` script then takes a weight fraction file and masks any grid points below a specified fraction.
+It is also possible to pass the script a shapefile from [this repository](https://github.com/DamienIrving/shapefiles)
+to mask all ocean points.
 
 ```
-$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/workflows/cmdline_programs/mask_agcd.py -h
+$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/apply_mask.py -h
 ```
 
 ```
-usage: mask_agcd.py [-h] [--obs_fraction_file OBS_FRACTION_FILE] [--fraction_threshold FRACTION_THRESHOLD]
-                    [--land_boundary LAND_BOUNDARY]
-                    infile [variables ...] outfile
+usage: apply_mask.py [-h] [--obs_fraction_file OBS_FRACTION_FILE] [--fraction_threshold FRACTION_THRESHOLD]
+                     [--land_boundary LAND_BOUNDARY]
+                     infile [variables ...] outfile
 
 Command line program for applying a mask/s to AGCD data.
 
@@ -97,5 +100,5 @@ options:
 For example,
 
 ```
-$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/workflows/cmdline_programs/mask_agcd.py /g/data/wp00/users/dbi599/precip_ari_AGCD_1970-1979.nc precip /g/data/wp00/users/dbi599/precip_ari_AGCD_1970-1979_masked.nc --obs_fraction_file /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1970-1979.nc --land_boundary /g/data/wp00/users/dbi599/shapefiles/australia/australia.shp
+$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/apply_mask.py /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979.nc precip /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979_masked.nc --obs_fraction_file /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc --land_boundary /g/data/wp00/shared_code/shapefiles/australia/australia.shp
 ```
