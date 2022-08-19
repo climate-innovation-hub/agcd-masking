@@ -62,7 +62,7 @@ $ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_c
 
 The resulting file is plotted in `obs_weight_fraction.ipynb`.
 
-![example obs weight fraction](obs_weight_fraction.png)
+![obs fraction example](obs_fraction_example.png)
 
 
 ## Applying a mask
