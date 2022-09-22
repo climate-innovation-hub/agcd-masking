@@ -1,5 +1,6 @@
 """Command line program for applying a mask/s to AGCD data."""
 
+import logging
 import argparse
 
 import numpy as np
@@ -7,6 +8,7 @@ import xarray as xr
 import geopandas as gp
 import cmdline_provenance as cmdprov
 import regionmask
+import dask.diagnostics
     
 
 def select_shapefile_regions(ds, shapes, lat_dim="lat", lon_dim="lon"):
@@ -82,7 +84,14 @@ def _nan_to_bool(mask):
 def main(args):
     """Run the program."""
     
-    ds = xr.open_dataset(args.infile)
+    logging.basicConfig(level=logging.INFO)
+    dask.diagnostics.ProgressBar().register()
+
+    ds = xr.open_dataset(args.infile, chunks='auto')
+    #ds = ds.chunk({'lat': -1, 'lon': -1})
+    logging.info(f'Array size: {ds[args.variables[0]].shape}')
+    logging.info(f'Chunk size: {ds[args.variables[0]].chunksizes}')
+
     if args.land_boundary:
         land_boundary = gp.read_file(args.land_boundary)
         ds = select_shapefile_regions(ds, land_boundary)  
