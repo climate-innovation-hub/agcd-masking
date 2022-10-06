@@ -19,7 +19,7 @@ def subset_shape_by_overlap_fraction(ds, shape, fraction, trim_edges=True):
     assert fraction > 0
     assert fraction <= 1.0
     mask = fraction_overlap_mask(shape, ds['lon'].values, ds['lat'].values, fraction)
-    
+    mask = mask.compute()
     ds = ds.where(mask)
     if trim_edges:
         ds_trimmed = ds.dropna("lat", how="all")
