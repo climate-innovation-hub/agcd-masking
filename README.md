@@ -102,7 +102,7 @@ options:
 For example,
 
 ```
-$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/apply_mask.py /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979.nc precip /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979_masked.nc --obs_fraction_file /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc --shapefile /g/data/wp00/shared_code/shapefiles/australia/australia.shp
+$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/apply_mask.py /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979.nc precip /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979_masked.nc --obs_fraction_file /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc --shapefile /g/data/ia39/aus-ref-clim-data-nci/shapefiles/data/australia/australia.shp
 ```
 
 By default, any grid cell whose centre point is within the shape defined by the shapefile is included.
