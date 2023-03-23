@@ -68,8 +68,9 @@ The resulting file is plotted in `obs_weight_fraction.ipynb`.
 ## Applying a mask
 
 The `apply_mask.py` script then takes a weight fraction file and masks any grid points below a specified fraction.
-It is also possible to pass the script a shapefile from [this repository](https://github.com/DamienIrving/shapefiles)
-to mask all ocean points.
+It is also possible to pass the script a shapefile to mask all ocean points.
+A shapefile describing the Australian land boundary can be found in the Australian Community Reference Climate Data Collection
+[shapefile collection](https://github.com/aus-ref-clim-data-nci/shapefiles).
 
 ```
 $ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/apply_mask.py -h
