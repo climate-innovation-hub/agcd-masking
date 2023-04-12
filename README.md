@@ -14,10 +14,8 @@ In parts of regional Australia there are large distances between rain gauges
 for which daily values are available.
 This means there are grid point values in the AGCD daily gridded precipitation data
 that haven't been influenced by actual precipitation observations.
-These grid points are filled (I think) with a climatological mean value
-derived from the monthly precipitation dataset (which has better observational coverage).
 For many analyses (e.g. trends, return periods) it can be a good idea to mask these grid points
-because they have artificially low variability.
+because they seem to have artificial / unrealistic characteristics (e.g. variability).
 
 To help with this masking,
 the AGCD dataset includes precipitation weight files assign the following values
@@ -60,7 +58,9 @@ For example,
 $ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/agcd_weight_fraction.py /g/data/zv2/agcd/v1/precip/weight/r005/01day/agcd_v1_precip_weight_r005_daily_19[6,7]*.nc /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc
 ```
 
-The resulting file is plotted in `obs_weight_fraction.ipynb`.
+The resulting file is plotted in `obs_weight_fraction.ipynb`,
+which also includes other plots exploring the behaviour of grid points
+that are never influenced by observations.
 
 ![obs fraction example](obs_fraction_example.png)
 
