@@ -154,7 +154,7 @@ def main(args):
     logging.basicConfig(level=logging.INFO)
     dask.diagnostics.ProgressBar().register()
 
-    ds = xr.open_dataset(args.infile)
+    ds = xr.open_mfdataset(args.infiles)
     logging.info(f'Array size: {ds[args.variables[0]].shape}')
     logging.info(f'Chunk size: {ds[args.variables[0]].chunksizes}')
 
@@ -164,14 +164,15 @@ def main(args):
             ds = subset_shape_by_overlap_fraction(ds, shape, args.shape_overlap)
         else:
             ds = subset_shape(ds, shape=shape)
+            ds = ds.drop_vars(['crs'])
             
     if args.obs_fraction_file:
         ds_frac = xr.open_dataset(args.obs_fraction_file)
         da_selection = ds_frac['fraction'] > args.obs_fraction_threshold 
         for var in args.variables:
             ds[var] = ds[var].where(da_selection) 
-
-    ds.attrs['history'] = cmdprov.new_log(infile_logs={args.infile: ds.attrs['history']})
+    
+    ds.attrs['history'] = cmdprov.new_log(infile_logs={args.infiles[0]: ds.attrs['history']})
     ds.to_netcdf(args.outfile)
 
 
@@ -180,9 +181,15 @@ if __name__ == '__main__':
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter
     )     
-    parser.add_argument("infile", type=str, help="input AGCD file name")
-    parser.add_argument("variables", type=str, nargs='*', help="variables")
+    parser.add_argument("infiles", type=str, nargs='*', help="input AGCD file names")
     parser.add_argument("outfile", type=str, help="output file name")
+    parser.add_argument(
+        "--variables",
+        type=str,
+        nargs='*',
+        required=True,
+        help="variables to mask"
+    )
     parser.add_argument(
         "--obs_fraction_file",
         type=str,
