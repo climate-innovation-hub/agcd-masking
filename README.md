@@ -77,19 +77,20 @@ $ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_c
 ```
 
 ```
-usage: apply_mask.py [-h] [--obs_fraction_file OBS_FRACTION_FILE] [--obs_fraction_threshold OBS_FRACTION_THRESHOLD]
-                     [--shapefile SHAPEFILE] [--shape_overlap SHAPE_OVERLAP]
-                     infile [variables ...] outfile
+usage: apply_mask.py [-h] --variables [VARIABLES ...] [--obs_fraction_file OBS_FRACTION_FILE]
+                     [--obs_fraction_threshold OBS_FRACTION_THRESHOLD] [--shapefile SHAPEFILE] [--shape_overlap SHAPE_OVERLAP]
+                     [infiles ...] outfile
 
 Command line program for applying a mask/s to AGCD data.
 
 positional arguments:
-  infile                input AGCD file name
-  variables             variables
+  infiles               input AGCD file names
   outfile               output file name
 
 options:
   -h, --help            show this help message and exit
+  --variables [VARIABLES ...]
+                        variables to mask
   --obs_fraction_file OBS_FRACTION_FILE
                         File containing fraction of days influenced by obs (see agcd_weight_fraction.py)
   --obs_fraction_threshold OBS_FRACTION_THRESHOLD
@@ -98,12 +99,13 @@ options:
                         Shapefile for masking (e.g. Australia coastline)
   --shape_overlap SHAPE_OVERLAP
                         Fraction grid cells must overlap shape to be included [default: include if centre in shape]
+
 ```
 
 For example,
 
 ```
-$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/apply_mask.py /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979.nc precip /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979_masked.nc --obs_fraction_file /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc --shapefile /g/data/ia39/aus-ref-clim-data-nci/shapefiles/data/australia/australia.shp
+$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/agcd-masking/apply_mask.py /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979.nc /g/data/wp00/users/dbi599/precip_ari_AGCD_1960-1979_masked.nc --variables precip --obs_fraction_file /g/data/wp00/users/dbi599/agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc --shapefile /g/data/ia39/aus-ref-clim-data-nci/shapefiles/data/australia/australia.shp
 ```
 
 By default, any grid cell whose centre point is within the shape defined by the shapefile is included.
