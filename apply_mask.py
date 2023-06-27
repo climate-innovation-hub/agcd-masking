@@ -157,6 +157,7 @@ def main(args):
     ds = xr.open_mfdataset(args.infiles)
     logging.info(f'Array size: {ds[args.variables[0]].shape}')
     logging.info(f'Chunk size: {ds[args.variables[0]].chunksizes}')
+    infile_histories = {args.infiles[0]: ds.attrs['history']}
 
     if args.shapefile:
         shape = gp.read_file(args.shapefile)
@@ -165,14 +166,16 @@ def main(args):
         else:
             ds = subset_shape(ds, shape=shape)
             ds = ds.drop_vars(['crs'])
+            del ds.attrs['crs']
             
     if args.obs_fraction_file:
         ds_frac = xr.open_dataset(args.obs_fraction_file)
+        infile_histories[args.obs_fraction_file] = ds_frac.attrs['history']
         da_selection = ds_frac['fraction'] > args.obs_fraction_threshold 
         for var in args.variables:
             ds[var] = ds[var].where(da_selection) 
     
-    ds.attrs['history'] = cmdprov.new_log(infile_logs={args.infiles[0]: ds.attrs['history']})
+    ds.attrs['history'] = cmdprov.new_log(infile_logs=infile_histories)
     ds.to_netcdf(args.outfile)
 
 
