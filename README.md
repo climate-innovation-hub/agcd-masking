@@ -21,10 +21,10 @@ the easiest way to use the scripts is to use the cloned copy at `/g/data/wp00/sh
 They can be run using the Python environment at `/g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python`.
 
 For example, to view the help information for the `apply_mask.py` script
-a member of the `wp00` project could run the following:
+a member of the `wp00` project could run the following at the command line:
 
 ```
-$ /g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/qqscale/apply_mask.py -h
+/g/data/wp00/users/dbi599/miniconda3/envs/cih/bin/python /g/data/wp00/shared_code/qqscale/apply_mask.py -h
 ```
 
 ### For members of the Australian Climate Service...
@@ -34,14 +34,15 @@ If you're a member of the `xv83` project on NCI
 you'll need to clone this GitHub repository.
 
 ```
-$ git clone git@github.com:climate-innovation-hub/agcd-masking.git
-$ cd agcd-masking
+git clone git@github.com:climate-innovation-hub/agcd-masking.git
+cd agcd-masking
 ```
 
-You can then run the scripts using the Python environment at `/g/data/xv83/dbi599/miniconda3/envs/masking`. e.g.:
+You can then run the scripts at the command line
+using the Python environment at `/g/data/xv83/dbi599/miniconda3/envs/masking`. e.g.:
 
 ```
-$ /g/data/xv83/dbi599/miniconda3/envs/masking/bin/python apply_mask.py -h
+/g/data/xv83/dbi599/miniconda3/envs/masking/bin/python apply_mask.py -h
 ```
 
 ### For everyone else...
@@ -51,7 +52,7 @@ pre-installed you'll need to create your own.
 For example:
 
 ```
-$ conda install -c conda-forge regionmask clisops cmdline_provenance 
+conda install -c conda-forge regionmask clisops cmdline_provenance 
 ```
 
 You can then clone this GitHub repository and run the help option
@@ -59,9 +60,9 @@ on one of the command line programs to check that everything is working.
 For example:
 
 ```
-$ git clone git@github.com:climate-innovation-hub/agcd-masking.git
-$ cd agcd-masking
-$ python apply_mask.py -h
+git clone git@github.com:climate-innovation-hub/agcd-masking.git
+cd agcd-masking
+python apply_mask.py -h
 ```
 
 ## Producing precipitation weights
@@ -84,7 +85,10 @@ The `agcd_weight_fraction.py` script can be used to calculate the fraction of da
 that had good observational (i.e. rain guage) coverage.
 
 ```
-$ python agcd_weight_fraction.py -h
+python agcd_weight_fraction.py -h
+```
+
+```
 usage: agcd_weight_fraction.py [-h] [infiles ...] outfile
 
 Command line program for calculating AGCD observation coverage.
@@ -111,7 +115,7 @@ options:
 For example, 
 
 ```
-$ python agcd_weight_fraction.py /g/data/zv2/agcd/v1/precip/weight/r005/01day/agcd_v1_precip_weight_r005_daily_19[6,7]*.nc agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc
+python agcd_weight_fraction.py /g/data/zv2/agcd/v1/precip/weight/r005/01day/agcd_v1_precip_weight_r005_daily_19[6,7]*.nc agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc
 ```
 
 The resulting file is plotted in `obs_weight_fraction.ipynb`,
@@ -129,7 +133,7 @@ A shapefile describing the Australian land boundary can be found in the Australi
 [shapefile collection](https://github.com/aus-ref-clim-data-nci/shapefiles).
 
 ```
-$ python apply_mask.py -h
+python apply_mask.py -h
 ```
 
 ```
@@ -161,7 +165,7 @@ options:
 For example,
 
 ```
-$ python apply_mask.py your_data.nc your_data_masked.nc --variables precip --obs_fraction_file agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc --shapefile /g/data/ia39/aus-ref-clim-data-nci/shapefiles/data/australia/australia.shp
+python apply_mask.py your_data.nc your_data_masked.nc --variables precip --obs_fraction_file agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc --shapefile /g/data/ia39/aus-ref-clim-data-nci/shapefiles/data/australia/australia.shp
 ```
 
 By default, any grid cell whose centre point is within the shape defined by the shapefile is included.
