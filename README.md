@@ -115,7 +115,7 @@ options:
 For example, 
 
 ```
-python agcd_weight_fraction.py /g/data/zv2/agcd/v1/precip/weight/r005/01day/agcd_v1_precip_weight_r005_daily_19[6,7]*.nc agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc
+python agcd_weight_fraction.py /g/data/zv2/agcd/v1-0-2/precip/weight/r005/01day/agcd_v1_precip_weight_r005_daily_19[6,7]*.nc agcd_v1_precip_weight_r005_obs-fraction_1960-1979.nc
 ```
 
 The resulting file is plotted in `obs_weight_fraction.ipynb`,
